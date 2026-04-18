@@ -4,6 +4,7 @@ import string
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+import os 
 
 app = FastAPI()
 
@@ -180,5 +181,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 app.mount("/", StaticFiles(directory=BASE_DIR / "static", html=True), name="static")
 
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
