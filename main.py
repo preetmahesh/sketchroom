@@ -173,14 +173,14 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
         if not room["clients"]:
             rooms.pop(room_code, None)
 
-
 from pathlib import Path
-from fastapi.staticfiles import StaticFiles
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).parent
+static_dir = BASE_DIR / "static"
 
-app.mount("/", StaticFiles(directory=BASE_DIR / "static", html=True), name="static")
+print("Static path:", static_dir)
 
+app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
