@@ -4,7 +4,8 @@ import string
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.staticfiles import StaticFiles
 import uvicorn
-import os 
+import os
+from pathlib import Path
 
 app = FastAPI()
 
@@ -33,7 +34,6 @@ async def broadcast_to_room(room_code: str, message: dict, exclude_ws=None):
 
 
 async def send_to_user(room_code: str, target_username: str, message: dict):
-    """Send a message to a specific user in a room (for WebRTC signaling)."""
     if room_code not in rooms:
         return
     data = json.dumps(message)
@@ -71,21 +71,18 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
     room = rooms[room_code]
     room["clients"][ws] = username
 
-    # Send stroke history to new joiner
     for stroke in room["strokes"]:
         try:
             await ws.send_text(json.dumps(stroke))
         except:
             break
 
-    # Send chat history to new joiner
     for msg in room["chat"]:
         try:
             await ws.send_text(json.dumps(msg))
         except:
             break
 
-    # Notify others
     await broadcast_to_room(room_code, {
         "type": "join",
         "username": username,
@@ -93,7 +90,6 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
         "users": list(room["clients"].values())
     }, exclude_ws=ws)
 
-    # Send full state to new joiner
     await ws.send_text(json.dumps({
         "type": "user_count",
         "user_count": len(room["clients"]),
@@ -123,7 +119,6 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
                 await broadcast_to_room(room_code, message, exclude_ws=ws)
 
             elif msg_type == "chat":
-                # Store and broadcast chat messages
                 chat_msg = {
                     "type": "chat",
                     "username": username,
@@ -131,22 +126,17 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
                     "time": message.get("time", "")
                 }
                 room["chat"].append(chat_msg)
-                # Keep only last 100 messages
                 if len(room["chat"]) > 100:
                     room["chat"] = room["chat"][-100:]
                 await broadcast_to_room(room_code, chat_msg, exclude_ws=ws)
-                # Echo back to sender too
                 await ws.send_text(json.dumps({**chat_msg, "own": True}))
 
-            # ── WebRTC Signaling ──
-            # These messages are forwarded to a specific target user
             elif msg_type in ["webrtc-offer", "webrtc-answer", "webrtc-ice"]:
                 target = message.get("target")
                 message["from"] = username
                 await send_to_user(room_code, target, message)
 
             elif msg_type == "voice-join":
-                # Tell everyone else this user turned on voice
                 await broadcast_to_room(room_code, {
                     "type": "voice-join",
                     "username": username
@@ -173,15 +163,13 @@ async def websocket_endpoint(ws: WebSocket, room_code: str, username: str):
         if not room["clients"]:
             rooms.pop(room_code, None)
 
-from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
 static_dir = BASE_DIR / "static"
 
-print("Static path:", static_dir)
-
 app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run("main:app", host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 8080))
+    print("Static path:", static_dir)
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
