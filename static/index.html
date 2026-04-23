@@ -50,7 +50,6 @@
     pointer-events: none;
   }
 
-  /* ─── FLOATING HEARTS ─── */
   .heart {
     position: absolute;
     font-size: 18px;
@@ -223,7 +222,6 @@
   .tool-btn.exit-btn { background: rgba(231,76,60,0.15); border-color: rgba(231,76,60,0.4); color: #e74c3c; }
   .tool-btn.exit-btn:hover { background: #e74c3c; border-color: #e74c3c; color: white; }
 
-  /* Voice button states */
   .tool-btn.voice-on { background: #2ecc71; border-color: #2ecc71; color: white; animation: voicePulse 1.5s infinite; }
   @keyframes voicePulse { 0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.5)} 50%{box-shadow:0 0 0 6px rgba(46,204,113,0)} }
 
@@ -262,11 +260,9 @@
   .users-dot { width: 7px; height: 7px; background: #2ecc71; border-radius: 50%; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  /* Canvas */
   #canvasWrap { flex: 1; overflow: hidden; position: relative; background: var(--canvas-bg); margin-bottom: 26px; }
   #mainCanvas { display: block; cursor: crosshair; touch-action: none; }
 
-  /* Status bar */
   #statusBar {
     position: fixed; bottom: 0; left: 0; right: 0;
     height: 26px; background: var(--ink);
@@ -275,7 +271,6 @@
   .status-item { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
   .status-item span { color: rgba(255,255,255,0.7); }
 
-  /* Drawing bubble */
   .draw-bubble {
     position: absolute; font-family: 'Space Mono', monospace; font-size: 10px;
     background: var(--ink); color: white; padding: 3px 8px;
@@ -284,7 +279,6 @@
   }
   .draw-bubble.visible { opacity: 1; }
 
-  /* Copied tip */
   .copied-tip {
     font-family: 'Space Mono', monospace; font-size: 10px;
     background: #2ecc71; color: var(--ink); padding: 2px 8px;
@@ -293,7 +287,6 @@
   }
   .copied-tip.show { opacity: 1; }
 
-  /* Toast */
   #toast {
     position: fixed; bottom: 40px; left: 50%;
     transform: translateX(-50%) translateY(60px);
@@ -306,24 +299,14 @@
 
   /* ─── CHAT PANEL ─── */
   #chatWidget {
-    position: fixed;
-    bottom: 26px;
-    right: 16px;
-    z-index: 100;
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+    position: fixed; bottom: 26px; right: 16px; z-index: 100;
+    display: none; flex-direction: column; align-items: flex-end; gap: 8px;
   }
 
   #chatPanel {
-    width: 300px;
-    height: 380px;
-    background: var(--ink);
+    width: 300px; height: 380px; background: var(--ink);
     border: 2px solid rgba(255,255,255,0.15);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    display: flex; flex-direction: column; overflow: hidden;
     box-shadow: -4px -4px 0 rgba(255,255,255,0.05);
     transform-origin: bottom right;
     animation: chatOpen 0.2s cubic-bezier(0.16,1,0.3,1) both;
@@ -335,188 +318,67 @@
   }
 
   .chat-header {
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.06);
+    padding: 10px 14px; background: rgba(255,255,255,0.06);
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
   }
 
-  .chat-header-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: white;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+  .chat-header-title { font-family: 'Space Mono', monospace; font-size: 11px; color: white; letter-spacing: 0.1em; text-transform: uppercase; }
 
-  .chat-close {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    padding: 0 2px;
-    transition: color 0.1s;
-  }
+  .chat-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; transition: color 0.1s; }
   .chat-close:hover { color: white; }
 
   #chatMessages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    scroll-behavior: smooth;
+    flex: 1; overflow-y: auto; padding: 12px;
+    display: flex; flex-direction: column; gap: 8px; scroll-behavior: smooth;
   }
-
   #chatMessages::-webkit-scrollbar { width: 3px; }
   #chatMessages::-webkit-scrollbar-track { background: transparent; }
   #chatMessages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
 
-  .chat-msg {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    max-width: 85%;
-  }
-
+  .chat-msg { display: flex; flex-direction: column; gap: 2px; max-width: 85%; }
   .chat-msg.own { align-self: flex-end; align-items: flex-end; }
   .chat-msg.other { align-self: flex-start; align-items: flex-start; }
-
-  .chat-msg-user {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-
-  .chat-msg-bubble {
-    padding: 7px 11px;
-    font-size: 13px;
-    line-height: 1.4;
-    word-break: break-word;
-  }
-
+  .chat-msg-user { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 0.05em; }
+  .chat-msg-bubble { padding: 7px 11px; font-size: 13px; line-height: 1.4; word-break: break-word; }
   .chat-msg.own .chat-msg-bubble { background: var(--accent); color: white; }
   .chat-msg.other .chat-msg-bubble { background: rgba(255,255,255,0.1); color: white; }
+  .chat-msg-time { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.2); }
+  .chat-system-msg { text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); padding: 2px 0; }
 
-  .chat-msg-time {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: rgba(255,255,255,0.2);
-  }
-
-  .chat-system-msg {
-    text-align: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,0.25);
-    padding: 2px 0;
-  }
-
-  .chat-input-row {
-    display: flex;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    flex-shrink: 0;
-  }
-
-  #chatInput {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-
+  .chat-input-row { display: flex; border-top: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+  #chatInput { flex: 1; background: transparent; border: none; outline: none; color: white; font-family: 'Syne', sans-serif; font-size: 13px; padding: 10px 12px; }
   #chatInput::placeholder { color: rgba(255,255,255,0.25); }
-
-  #chatSend {
-    background: var(--accent);
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 0 14px;
-    font-size: 14px;
-    transition: background 0.1s;
-    flex-shrink: 0;
-  }
+  #chatSend { background: var(--accent); border: none; color: white; cursor: pointer; padding: 0 14px; font-size: 14px; transition: background 0.1s; flex-shrink: 0; }
   #chatSend:hover { background: #e63d0f; }
 
-  /* Chat toggle button */
   #chatToggle {
-    width: 46px;
-    height: 46px;
-    background: var(--ink);
-    border: 2px solid rgba(255,255,255,0.2);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    position: relative;
-    flex-shrink: 0;
+    width: 46px; height: 46px; background: var(--ink);
+    border: 2px solid rgba(255,255,255,0.2); color: white; font-size: 20px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; position: relative; flex-shrink: 0;
   }
   #chatToggle:hover { background: rgba(15,14,13,0.85); border-color: rgba(255,255,255,0.4); }
 
   #chatUnread {
-    position: absolute;
-    top: -6px; right: -6px;
-    width: 18px; height: 18px;
-    background: var(--accent);
-    border-radius: 50%;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: white;
-    display: none;
-    align-items: center;
-    justify-content: center;
+    position: absolute; top: -6px; right: -6px;
+    width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+    font-family: 'Space Mono', monospace; font-size: 10px; color: white;
+    display: none; align-items: center; justify-content: center;
   }
-
   #chatUnread.show { display: flex; }
 
   /* ─── VOICE PANEL ─── */
   #voiceBar {
-    position: fixed;
-    bottom: 80px;
-    right: 72px;
-    background: var(--ink);
-    border: 2px solid rgba(255,255,255,0.15);
-    padding: 8px 12px;
-    display: none;
-    gap: 8px;
-    align-items: center;
-    z-index: 99;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
+    position: fixed; bottom: 80px; right: 72px;
+    background: var(--ink); border: 2px solid rgba(255,255,255,0.15);
+    padding: 8px 12px; display: none; gap: 8px; align-items: center;
+    z-index: 99; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted);
   }
-
   #voiceBar.visible { display: flex; }
+  .voice-user { display: flex; align-items: center; gap: 5px; color: white; }
+  .voice-user-dot { width: 7px; height: 7px; background: #2ecc71; border-radius: 50%; }
 
-  .voice-user {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: white;
-  }
-
-  .voice-user-dot {
-    width: 7px; height: 7px;
-    background: #2ecc71;
-    border-radius: 50%;
-  }
-
-  /* Mobile adjustments */
   @media (max-width: 600px) {
     .toolbar { padding: 0 8px; gap: 4px; }
     .toolbar-brand { font-size: 12px; }
@@ -531,24 +393,19 @@
 <!-- ═══════════ LANDING ═══════════ -->
 <div id="landing">
   <canvas id="heartsCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
-
   <div class="landing-logo" style="z-index:1">✦ Collaborative Canvas</div>
   <h1 class="landing-title">Sketch<span>room</span></h1>
   <p class="landing-sub">Pret n Jia | have funnn </p>
-
   <div class="landing-card">
     <div class="section-label">Your name</div>
     <div class="input-row" style="margin-bottom:32px">
       <input class="input-field" id="usernameInput" placeholder="e.g. Pret n Jia" maxlength="20" />
     </div>
-
     <div class="section-label">Create a new room</div>
     <div class="input-row">
       <button class="btn btn-primary" style="width:100%" onclick="createRoom()">Create Room →</button>
     </div>
-
     <div class="divider">or join existing</div>
-
     <div class="section-label">Room code</div>
     <div class="input-row">
       <input class="input-field code" id="roomCodeInput" placeholder="ABC123" maxlength="6" />
@@ -562,22 +419,17 @@
 <div id="whiteboard">
   <div class="toolbar">
     <div class="toolbar-brand">Sketch<span>room</span></div>
-
     <div class="room-badge" id="roomBadge" title="Click to copy" onclick="copyRoomCode()">
       ——
       <div class="copied-tip" id="copiedTip">copied!</div>
     </div>
-
     <div class="tool-sep"></div>
-
     <button class="tool-btn active" id="btnPen" title="Pen" onclick="selectTool('pen')">✏️</button>
     <button class="tool-btn" id="btnEraser" title="Eraser" onclick="selectTool('eraser')">⬜</button>
     <button class="tool-btn" title="Undo (Ctrl+Z)" onclick="undo()">↩</button>
     <button class="tool-btn" title="Redo (Ctrl+Y)" onclick="redo()">↪</button>
     <button class="tool-btn danger" title="Clear canvas" onclick="clearCanvas()">✕</button>
-
     <div class="tool-sep"></div>
-
     <div style="display:flex;gap:4px;align-items:center">
       <div class="color-swatch selected" style="background:#0f0e0d" data-color="#0f0e0d" onclick="selectColor(this)"></div>
       <div class="color-swatch" style="background:#ff4d1c" data-color="#ff4d1c" onclick="selectColor(this)"></div>
@@ -588,30 +440,20 @@
       <button class="custom-color-btn" title="Custom color" onclick="document.getElementById('colorPicker').click()">+</button>
       <input type="color" id="colorPicker" value="#0f0e0d" onchange="setCustomColor(this.value)" />
     </div>
-
     <div class="tool-sep"></div>
-
     <div class="size-wrap">
       <span class="size-label">SZ</span>
       <input type="range" id="sizeSlider" min="1" max="50" value="3" oninput="changeSize(this.value)" />
       <span class="size-val" id="sizeVal">3</span>
     </div>
-
     <div class="tool-sep"></div>
-
-    <!-- Voice button -->
     <button class="tool-btn" id="btnVoice" title="Join voice chat" onclick="toggleVoice()">🎙️</button>
-
     <div class="toolbar-spacer"></div>
-
     <div class="users-indicator">
       <div class="users-dot"></div>
       <span id="userCount">1</span>
     </div>
-
     <div class="tool-sep"></div>
-
-    <!-- Exit button -->
     <button class="tool-btn exit-btn" title="Exit room" onclick="exitRoom()">✖ Exit</button>
   </div>
 
@@ -629,7 +471,6 @@
 
 <!-- ═══════════ CHAT WIDGET ═══════════ -->
 <div id="chatWidget">
-  <!-- Chat panel (hidden by default) -->
   <div id="chatPanel" style="display:none">
     <div class="chat-header">
       <span class="chat-header-title">💬 Room Chat</span>
@@ -641,21 +482,17 @@
       <button id="chatSend" onclick="sendChat()">→</button>
     </div>
   </div>
-
-  <!-- Toggle button -->
   <button id="chatToggle" onclick="toggleChat()" title="Chat">
     💬
     <div id="chatUnread"></div>
   </button>
 </div>
 
-<!-- Voice users bar -->
 <div id="voiceBar">
   <span>🎙️ voice:</span>
   <div id="voiceUsers"></div>
 </div>
 
-<!-- Toast -->
 <div id="toast"></div>
 
 <script>
@@ -687,14 +524,29 @@ let unreadCount = 0;
 
 // ─── WebRTC Voice ─────────────────────────────────────────────────────
 let localStream = null;
-let peerConnections = {}; // username -> RTCPeerConnection
+let peerConnections = {};
 let voiceOn = false;
 let voiceUsers = new Set();
 
 const iceConfig = {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
-    { urls: 'stun:stun1.l.google.com:19302' }
+    { urls: 'stun:stun1.l.google.com:19302' },
+    {
+      urls: 'turn:a.relay.metered.ca:80',
+      username: '8142f9a34b1ed2cf751445f7',
+      credential: 'XZ0F6fZoTR62Kc2g'
+    },
+    {
+      urls: 'turn:a.relay.metered.ca:443',
+      username: '8142f9a34b1ed2cf751445f7',
+      credential: 'XZ0F6fZoTR62Kc2g'
+    },
+    {
+      urls: 'turns:a.relay.metered.ca:443?transport=tcp',
+      username: '8142f9a34b1ed2cf751445f7',
+      credential: 'XZ0F6fZoTR62Kc2g'
+    }
   ]
 };
 
@@ -713,7 +565,6 @@ function initHearts() {
   resize();
   window.addEventListener('resize', resize);
 
-  // Create hearts
   for (let i = 0; i < 18; i++) {
     hearts.push({
       x: Math.random() * canvas.width,
@@ -822,7 +673,6 @@ function exitRoom() {
   if (!confirm('Leave this room?')) return;
   if (voiceOn) leaveVoice();
   if (ws) { ws.close(); ws = null; }
-  // Reset state
   ownStrokes = {}; undoneStrokes = {}; otherStrokes = {};
   undoStack = []; redoStack = [];
   document.getElementById('chatMessages').innerHTML = '';
@@ -889,7 +739,6 @@ function handleMessage(msg) {
       showToast(`${msg.username} joined`);
       addSystemMsg(`${msg.username} joined the room`);
       updateUserCount(msg.user_count);
-      // If voice is on, initiate connection with new user
       if (voiceOn && msg.username !== username) initiateVoiceCall(msg.username);
       break;
 
@@ -919,7 +768,6 @@ function handleMessage(msg) {
       if (!chatOpen) { unreadCount++; updateUnread(); }
       break;
 
-    // WebRTC signaling
     case 'webrtc-offer':
       handleOffer(msg.from, msg.sdp);
       break;
@@ -1197,26 +1045,34 @@ function leaveVoice() {
 }
 
 function createPeer(targetUser) {
+  if (peerConnections[targetUser]) {
+    peerConnections[targetUser].close();
+    delete peerConnections[targetUser];
+  }
+
   const pc = new RTCPeerConnection(iceConfig);
 
-  // Add local tracks
   if (localStream) localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
 
-  // On remote track — play it
   pc.ontrack = (e) => {
     let audio = document.getElementById('audio-' + targetUser);
     if (!audio) {
       audio = document.createElement('audio');
       audio.id = 'audio-' + targetUser;
       audio.autoplay = true;
+      audio.playsinline = true;
       document.body.appendChild(audio);
     }
-    audio.srcObject = e.streams[0];
+    if (e.streams && e.streams[0]) audio.srcObject = e.streams[0];
   };
 
-  // ICE candidates
   pc.onicecandidate = (e) => {
-    if (e.candidate) send({ type:'webrtc-ice', target:targetUser, candidate:e.candidate });
+    if (e.candidate) send({ type: 'webrtc-ice', target: targetUser, candidate: e.candidate });
+  };
+
+  pc.oniceconnectionstatechange = () => {
+    console.log(`ICE state with ${targetUser}:`, pc.iceConnectionState);
+    if (pc.iceConnectionState === 'failed') pc.restartIce();
   };
 
   peerConnections[targetUser] = pc;
@@ -1224,29 +1080,43 @@ function createPeer(targetUser) {
 }
 
 async function initiateVoiceCall(targetUser) {
+  console.log('Initiating call to', targetUser);
   const pc = createPeer(targetUser);
-  const offer = await pc.createOffer();
-  await pc.setLocalDescription(offer);
-  send({ type:'webrtc-offer', target:targetUser, sdp:offer });
+  try {
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    send({ type: 'webrtc-offer', target: targetUser, sdp: offer });
+  } catch(e) { console.error('Offer failed:', e); }
 }
 
 async function handleOffer(fromUser, sdp) {
   if (!voiceOn) return;
+  console.log('Got offer from', fromUser);
   const pc = createPeer(fromUser);
-  await pc.setRemoteDescription(new RTCSessionDescription(sdp));
-  const answer = await pc.createAnswer();
-  await pc.setLocalDescription(answer);
-  send({ type:'webrtc-answer', target:fromUser, sdp:answer });
+  try {
+    await pc.setRemoteDescription(new RTCSessionDescription(sdp));
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    send({ type: 'webrtc-answer', target: fromUser, sdp: answer });
+  } catch(e) { console.error('Answer failed:', e); }
 }
 
 async function handleAnswer(fromUser, sdp) {
   const pc = peerConnections[fromUser];
-  if (pc) await pc.setRemoteDescription(new RTCSessionDescription(sdp));
+  if (pc) {
+    try {
+      await pc.setRemoteDescription(new RTCSessionDescription(sdp));
+    } catch(e) { console.error('Handle answer failed:', e); }
+  }
 }
 
 async function handleIce(fromUser, candidate) {
   const pc = peerConnections[fromUser];
-  if (pc && candidate) await pc.addIceCandidate(new RTCIceCandidate(candidate));
+  if (pc && candidate) {
+    try {
+      await pc.addIceCandidate(new RTCIceCandidate(candidate));
+    } catch(e) { console.error('ICE candidate failed:', e); }
+  }
 }
 
 function closeVoicePeer(user) {
